@@ -1,3 +1,5 @@
+import { useReducer, useEffect } from "react";
+
 import type { LinksFunction } from "@remix-run/node";
 import {
   Links,
@@ -7,8 +9,8 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
+
 import { GameContext, GameContextReducer } from "./contexts/_index";
-import { useReducer, useEffect } from "react";
 
 import stylesheet from "~/styles/tailwind.css";
 import custom from "~/styles/custom.css";
@@ -75,7 +77,7 @@ export default function App() {
         dispatchContext({ type: 'UPDATE_TIME', payload: newDate })
 
         const availableWords = words.filter(
-          (word: string) => !localStorage.getItem('prevSelectedWords')!.includes(word)
+          (word: string) => !localStorage.getItem('prevSelectedWords')?.includes(word)
         );
 
         if (availableWords.length === 0) {
@@ -145,7 +147,6 @@ export default function App() {
         <Links />
       </head>
       <body>
-        {/* <h1>Selected Word: {state.word}</h1> */}
         <GameContext.Provider value={{ state, dispatchContext }}>
           <Outlet />
         </GameContext.Provider>

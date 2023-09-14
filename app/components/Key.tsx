@@ -1,10 +1,9 @@
 import { useContext, useEffect, useState } from "react";
+
 import { GameContext } from "~/contexts/_index";
 import type { GameContextType } from "~/types/_index";
 
-export default function Key(props: {
-  letter: string; status: number;
-}) {
+export default function Key(props: { letter: string }) {
 
   const { state, dispatchContext }: GameContextType = useContext(GameContext);
 
@@ -24,22 +23,15 @@ export default function Key(props: {
 
   return (
     <button className="outline-none" onClick={() => { dispatchContext({ type: 'UPDATE_INPUT', payload: props.letter }) }}>
-      {/* <div className={`px-3 md:px-4 flex flex-row shrink-0 items-center justify-center rounded-md min-h-[30px] md:min-w-[45px] md:min-h-[45px] font-extrabold text-[10px] md:text-[16px] duration-150 ${style}`}>
-        {props.letter === 'BACKSPACE' ? (
-          <img src={state.theme === 'light' ? "/assets/icons/del.svg" : "/assets/icons/del_dark.svg"} alt="Delete icon" />
-        ) : (
-          props.letter
-        )}
-      </div > */}
       {props.letter === 'BACKSPACE' ? (
         <div className={`px-3 md:px-4 flex flex-row shrink-0 items-center justify-center rounded-md min-w-[30px] min-h-[30px] md:min-w-[45px] md:min-h-[45px] duration-150 ${style}`}>
           <img src={state.theme === 'light' ? "/assets/icons/del.svg" : "/assets/icons/del_dark.svg"} alt="Delete icon" />
-        </div >
+        </div>
 
       ) : (
         <div className={`px-3 md:px-4 flex flex-row shrink-0 items-center justify-center rounded-md min-h-[30px] md:min-w-[45px] md:min-h-[45px] font-extrabold text-[9px] md:text-[16px] duration-150 ${style}`}>
           {props.letter}
-        </div >
+        </div   >
       )}
     </button>
   );

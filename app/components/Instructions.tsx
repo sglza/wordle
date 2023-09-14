@@ -1,7 +1,7 @@
 import LetterPiece from "./LetterPiece";
 
 export default function Instructions(props: {
-  closeModal: any
+  closeModal: () => void;
 }) {
   return (
     <>
@@ -49,7 +49,7 @@ export default function Instructions(props: {
 
       <button type="button"
         className="w-1/2 self-center rounded-md bg-[#6AAA64] px-3 py-2 text-[20px] font-extrabold text-white shadow-sm hover:bg-[#5F995A] duration-150"
-        onClick={props.closeModal}>
+        onClick={() => props.closeModal()}>
         ¡JUGAR!
       </button>
     </>

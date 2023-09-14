@@ -1,36 +1,47 @@
-import type { GameState } from "~/types/_index";
-import { GameContext } from "~/contexts/_index";
-import GamePiece from "./GamePiece";
 import { useContext } from "react";
 
-export default function GameRow(props: {
+import { GameContext } from "~/contexts/_index";
+import type { GameState } from "~/types/_index";
+import GamePiece from "./GamePiece";
+
+interface GameRowProps {
   attempt?: string;
   input?: string;
   id?: number;
-}) {
+}
+
+export default function GameRow({
+  attempt,
+  input,
+  id
+}: GameRowProps) {
 
   const { state }: { state: GameState } = useContext(GameContext);
 
   const isItGreen = (i: number) => {
-    return props.attempt!.charAt(i) === state.word.charAt(i)
+    return attempt?.charAt(i) === state.word.charAt(i)
   }
 
   const isItOrange = (i: number) => {
     let isOrange: boolean = false;
-    let str: string = state.word;
     let indices: number[] = [];
 
     // check if its is somewhere in the word
-    if (state.word.includes(props.attempt!.charAt(i))) {
+    if (state.word.includes(attempt!.charAt(i))) {
       // get all the position where it is
-      for (var j = 0; j < str.length; j++) {
-        if (state.word.charAt(j) === props.attempt!.charAt(i))
-          indices.push(j);
+      // for (var j = 0; j < state.word.length; j++) {
+      //   if (state.word.charAt(j) === attempt!.charAt(i))
+      //     indices.push(j);
+      // }
+
+      for (const index of state.word.split("").keys()) {
+        if (state.word.charAt(index) === attempt?.charAt(i))
+          indices.push(index);
       }
 
       // check there is at least one that isn't correct yet
       for (const index of indices) {
-        if (state.word.charAt(index) !== props.attempt!.charAt(index)) {
+        if (state.word.charAt(index) !== attempt?.charAt(index)) {
           isOrange = true;
         }
       }
@@ -40,10 +51,10 @@ export default function GameRow(props: {
   }
 
   return (
-    props.attempt ? (
+    attempt ? (
       <div className="flex flex-row space-x-2 duration-250">
         {[...Array(5)].map((_, i) => <GamePiece
-          letter={props.attempt!.charAt(i)}
+          letter={attempt?.charAt(i)}
           status={
             isItGreen(i) ? 3 : (
               isItOrange(i) ? 2 : 1
@@ -52,15 +63,27 @@ export default function GameRow(props: {
           key={i}
           className={`flip${i + 1}`}
         />)}
-      </div >
+      </div>
     ) : (
       <div className="flex flex-row space-x-2 duration-250 transition-colors	">
-        {props.id === state.attempts.length || props.id === 0 ? <GamePiece letter={props.input!.charAt(0)} /> : <GamePiece />}
-        {props.id === state.attempts.length || props.id === 0 ? <GamePiece letter={props.input!.charAt(1)} /> : <GamePiece />}
-        {props.id === state.attempts.length || props.id === 0 ? <GamePiece letter={props.input!.charAt(2)} /> : <GamePiece />}
-        {props.id === state.attempts.length || props.id === 0 ? <GamePiece letter={props.input!.charAt(3)} /> : <GamePiece />}
-        {props.id === state.attempts.length || props.id === 0 ? <GamePiece letter={props.input!.charAt(4)} /> : <GamePiece />}
-      </div >
+        {id === state.attempts.length || id === 0 ? (
+          <>
+            <GamePiece letter={input?.charAt(0)} />
+            <GamePiece letter={input?.charAt(1)} />
+            <GamePiece letter={input?.charAt(2)} />
+            <GamePiece letter={input?.charAt(3)} />
+            <GamePiece letter={input?.charAt(4)} />
+          </>
+        ) : (
+          <>
+            <GamePiece />
+            <GamePiece />
+            <GamePiece />
+            <GamePiece />
+            <GamePiece />
+          </>
+        )}
+      </div>
     )
   );
 }

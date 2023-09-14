@@ -1,4 +1,5 @@
 import { useContext } from "react";
+
 import { GameContext } from "~/contexts/_index";
 import { useCountdown } from "~/hooks/useCountdown";
 import type { GameContextType } from "~/types/_index";
@@ -17,7 +18,7 @@ export default function Stats() {
       <div className="flex flex-row justify-between px-8 py-2">
         <div className="text-center">
           <div className="font-bold text-[35px]">
-            {state.endedBy.success ? (
+            {state.endedBy.success || state.endedBy.attempts ? (
               state.previousWords.length
             ) : (
               state.previousWords.length - 1

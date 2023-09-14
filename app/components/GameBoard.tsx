@@ -1,7 +1,8 @@
-import type { GameState } from "~/types/_index";
-import { GameContext } from "~/contexts/_index";
-import GameRow from "./GameRow";
 import { useContext } from "react";
+
+import { GameContext } from "~/contexts/_index";
+import type { GameState } from "~/types/_index";
+import GameRow from "./GameRow";
 
 export default function GameBoard() {
 
@@ -19,6 +20,6 @@ export default function GameBoard() {
           <GameRow input={state.input} id={i + state.attempts.length} key={i} />
         )
       }
-    </div >
+    </div>
   );
 }

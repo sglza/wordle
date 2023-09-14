@@ -1,10 +1,16 @@
-export default function LetterPiece(props: {
-  letter: string; status: number;
-}) {
+interface LetterPieceProps {
+  letter: string;
+  status: number;
+}
+
+export default function LetterPiece({
+  letter,
+  status
+}: LetterPieceProps) {
 
   let style;
 
-  switch (props.status) {
+  switch (status) {
     case 1:
       style = ' bg-[#939B9F] '; // gray
       break;
@@ -21,7 +27,7 @@ export default function LetterPiece(props: {
 
   return (
     <div className={`flex items-center justify-center rounded-md w-[50px] h-[50px] md:w-[60px] md:h-[60px] font-extrabold text-[25px] md:text-[30px] ${style}`}>
-      {props.letter}
-    </div >
+      {letter}
+    </div>
   );
 }

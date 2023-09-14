@@ -79,10 +79,10 @@ export default function Index() {
 
         {!visitorInd && (
           <Modal>
-            <Instructions closeModal={() => setVisitorInd(true)} />
+            <Instructions closeModal={() => { setVisitorInd(true) }} />
           </Modal>
         )}
-      </div >
-    </div >
+      </div>
+    </div>
   );
 }
