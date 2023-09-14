@@ -29,11 +29,6 @@ export default function GameRow({
     // check if its is somewhere in the word
     if (state.word.includes(attempt!.charAt(i))) {
       // get all the position where it is
-      // for (var j = 0; j < state.word.length; j++) {
-      //   if (state.word.charAt(j) === attempt!.charAt(i))
-      //     indices.push(j);
-      // }
-
       for (const index of state.word.split("").keys()) {
         if (state.word.charAt(index) === attempt?.charAt(i))
           indices.push(index);
